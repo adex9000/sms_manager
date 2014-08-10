@@ -1,0 +1,30 @@
+{
+  "name": "sms_manager_wip",
+  "version": "1.0.0",
+  "authors": [
+    "Mfawa Alfred Onen <muffycompoqm@gmail.com>"
+  ],
+  "description": "BHU SMS Manager WIP",
+  "keywords": [
+    "Bingham",
+    "University",
+    "Mfawa",
+    "Alfred",
+    "Onen",
+    "Laravel",
+    "Bootstrap",
+    "SMS"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.binghamuni.edu.ng",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0"
+  }
+}
