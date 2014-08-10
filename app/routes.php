@@ -2,7 +2,6 @@
 
 // Shared view data
 View::share('user', Auth::user());
-
 View::share('active_menu_item', '');
 View::share('active_menu_item_dropdown', '');
 
