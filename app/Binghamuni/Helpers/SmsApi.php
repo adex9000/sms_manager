@@ -89,10 +89,13 @@ class SmsApi {
      */
     public function getSmsBalance()
     {
-        if(!empty($this->getUsername()) && !empty($this->getPassword()) && !empty($this->getUrl())){
+        $username = $this->getUsername();
+        $password = $this->getPassword();
+        $url = $this->getUrl();
+        if(!empty($username) && !empty($password) && !empty($url)){
             try
             {
-                $response = $this->PostRequest($this->getUrl(), ['UN' => $this->getUsername(), 'P' => $this->getPassword()]);
+                $response = $this->PostRequest($url, ['UN' => $username, 'P' => $password]);
                 $code = explode(' ', $response[0]);
                 $balance = explode(' ', $response[1]);
 
@@ -114,21 +117,29 @@ class SmsApi {
      */
     public function send()
     {
-        if(!empty($this->getUsername()) && !empty($this->getPassword()) && !empty($this->getUrl()) &&
-            !empty($this->getSenderId()) && !empty($this->getSmsMessage())
-            && !empty($this->getdestinationNos())){
+        $username = $this->getUsername();
+        $password = $this->getPassword();
+        $sendId = $this->getSenderId();
+        $smsMessage = $this->getSmsMessage();
+        $destinationNos = $this->getdestinationNos();
+        $longSms = $this->getLongSms();
+        $url = $this->getUrl();
+
+        if(!empty($username) && !empty($password) && !empty($url) &&
+            !empty($sendId) && !empty($smsMessage)
+            && !empty($destinationNos)){
             $data = [
-                'UN' => $this->getUsername(),
-                'P' => $this->getPassword(),
-                'SA' => $this->getSenderId(),
-                'DA' => $this->getDestinationNos(),
-                'L' => $this->getLongSms(),
-                'M' => $this->getSmsMessage(),
+                'UN' => $username,
+                'P' => $password,
+                'SA' => $sendId,
+                'DA' => $destinationNos,
+                'L' => $longSms,
+                'M' => $smsMessage,
             ];
 
             try
             {
-                $response = $this->PostRequest($this->getUrl(), $data);
+                $response = $this->PostRequest($url, $data);
 
                 $code = explode(' ', $response[0]);
 

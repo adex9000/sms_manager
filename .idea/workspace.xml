@@ -55,11 +55,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="master.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/master.blade.php">
+      <file leaf-file-name="SmsApi.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Binghamuni/Helpers/SmsApi.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25301206" vertical-offset="0" max-vertical-offset="1092">
-              <caret line="6" column="88" selection-start-line="6" selection-start-column="88" selection-end-line="6" selection-end-column="88" />
+            <state vertical-scroll-proportion="0.5060241" vertical-offset="3612" max-vertical-offset="7812">
+              <caret line="141" column="51" selection-start-line="141" selection-start-column="51" selection-end-line="141" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -75,7 +75,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/database/seeds/StaffTypeTableSeederTableSeeder.php" />
         <option value="$PROJECT_DIR$/app/database/migrations/2014_07_19_221814_create_sms_manager_users.php" />
         <option value="$PROJECT_DIR$/app/config/auth.php" />
         <option value="$PROJECT_DIR$/app/Binghamuni/Forms/UsersFormValidation.php" />
@@ -91,7 +90,6 @@
         <option value="$PROJECT_DIR$/app/database/migrations/2014_07_20_203223_add_long_sms_to_sent_sms_table.php" />
         <option value="$PROJECT_DIR$/app/views/users/new_sms.blade.php" />
         <option value="$PROJECT_DIR$/app/Binghamuni/Users/User.php" />
-        <option value="$PROJECT_DIR$/app/Binghamuni/Helpers/SmsApi.php" />
         <option value="$PROJECT_DIR$/app/config/app.php" />
         <option value="$PROJECT_DIR$/app/Binghamuni/Students/Student.php" />
         <option value="$PROJECT_DIR$/app/Binghamuni/Forms/StudentSearchForm.php" />
@@ -126,6 +124,8 @@
         <option value="$PROJECT_DIR$/homestead/Homestead.yaml" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/app/views/layouts/master.blade.php" />
+        <option value="$PROJECT_DIR$/bootstrap/start.php" />
+        <option value="$PROJECT_DIR$/app/Binghamuni/Helpers/SmsApi.php" />
       </list>
     </option>
   </component>
@@ -320,13 +320,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/laracasts/flash/src/Laracasts/Flash/FlashNotifier.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36746988" vertical-offset="1184" max-vertical-offset="1848">
-          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Http/RedirectResponse.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33283132" vertical-offset="955" max-vertical-offset="5880">
@@ -345,13 +338,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.57831323" vertical-offset="5076" max-vertical-offset="5768">
           <caret line="195" column="60" selection-start-line="195" selection-start-column="60" selection-end-line="195" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Binghamuni/Helpers/SmsApi.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30107528" vertical-offset="420" max-vertical-offset="7504">
-          <caret line="22" column="33" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -650,13 +636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bootstrap/start.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5481928" vertical-offset="168" max-vertical-offset="1904">
-          <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env.local.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33734939" vertical-offset="0" max-vertical-offset="664">
@@ -676,6 +655,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25301206" vertical-offset="0" max-vertical-offset="1092">
           <caret line="6" column="88" selection-start-line="6" selection-start-column="88" selection-end-line="6" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/local/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6325301" vertical-offset="0" max-vertical-offset="672">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap/start.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.71686745" vertical-offset="0" max-vertical-offset="1904">
+          <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Binghamuni/Helpers/SmsApi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5060241" vertical-offset="3612" max-vertical-offset="7812">
+          <caret line="141" column="51" selection-start-line="141" selection-start-column="51" selection-end-line="141" selection-end-column="51" />
           <folding />
         </state>
       </provider>
