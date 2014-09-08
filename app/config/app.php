@@ -125,7 +125,7 @@ return array(
         'Laracasts\Validation\ValidationServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
-
+        'Maatwebsite\Excel\ExcelServiceProvider',
 	),
 
 	/*
@@ -193,7 +193,8 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
         'Flash'             => 'Laracasts\Flash\Flash',
-        'Utilities'         => 'Binghamuni\Helpers\Utilities'
+        'Utilities'         => 'Binghamuni\Helpers\Utilities',
+        'Excel'             => 'Maatwebsite\Excel\Facades\Excel',
 
 	),
 

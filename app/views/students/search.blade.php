@@ -18,18 +18,57 @@
 
                     <div class="row">
                         <div class="col-lg-12 sm-form">
-                            {{ $errors->first('student_search', '<span class="help-block alert alert-danger">:message</span>') }}
-                            <form action="{{ URL::route('student_search') }}" class="form-inline" role="form" method="post">
-                                {{ Form::token() }}
-                                <div class="form-group">
-                                    <label for="search" class="sr-only">Matric No.</label>
-                                    <input type="text" class="form-control" id="search" name="student_search" placeholder="Matric No, First Name or Surname">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{ $errors->first('student_search', '<span class="help-block alert alert-danger">:message</span>') }}
+                                     <form action="{{ URL::route('student_search') }}" class="form-inline" role="form" method="post">
+                                         {{ Form::token() }}
+                                         <div class="form-group">
+                                             <label for="search" class="sr-only">Matric No.</label>
+                                             <input type="text" class="form-control" id="search" name="student_search" placeholder="Matric No, First Name or Surname">
+                                         </div>
+                                         <button type="submit" class="btn btn-default">
+                                             <span class="glyphicon glyphicon-search"></span>
+                                             Search
+                                         </button>
+                                     </form>
                                 </div>
-                                <button type="submit" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                    Search
-                                </button>
-                            </form>
+                                @if($results)
+                                <div class="col-lg-6">
+                                        <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
+                                            {{ Form::token() }}
+                                            {{ Form::hidden('csv',Utilities::simpleEncode(serialize($results))) }}
+                                            {{ Form::hidden('source','search') }}
+                                            <button type="submit" class="btn btn-info">
+                                            <span class="glyphicon glyphicon-cloud-download"></span>
+                                            CSV
+                                            </button>
+                                            <!-- Enhance experience with modal confirmation box -->
+                                        </form>
+                                        <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
+                                            {{ Form::token() }}
+                                            {{ Form::hidden('xls',Utilities::simpleEncode(serialize($results))) }}
+                                            {{ Form::hidden('source','search') }}
+                                            <button type="submit" class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-cloud-download"></span>
+                                            MS Excel
+                                            </button>
+                                            <!-- Enhance experience with modal confirmation box -->
+                                        </form>
+                                        <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
+                                            {{ Form::token() }}
+                                            {{ Form::hidden('xlsx',Utilities::simpleEncode(serialize($results))) }}
+                                            {{ Form::hidden('source','search') }}
+                                            <button type="submit" class="btn btn-success">
+                                            <span class="glyphicon glyphicon-cloud-download"></span>
+                                            MS Excel 2007+
+                                            </button>
+                                            <!-- Enhance experience with modal confirmation box -->
+                                        </form>
+                                </div>
+                                @endif
+
+                            </div>
                         </div>
 
                         <div class="col-lg-12">
@@ -47,12 +86,12 @@
                                         <form action="{{ URL::route('send_sms_message') }}" role="form" method="post">
                                             {{ Form::token() }}
                                             {{ Form::hidden('sms_all',Utilities::simpleEncode(serialize($results))) }}
-                                            <button type="submit" class="btn-link">Send SMS to all Students</button>
+                                            <button type="submit" class="btn-link">Send SMS to all</button>
                                             <!-- Enhance experience with modal confirmation box -->
                                         </form>
                                     </th>
                                     @else
-                                    <th class="text-center"">Action</th>
+                                    <th class="text-center">Action</th>
                                     @endif
                                 </tr>
                                 </thead>
@@ -72,7 +111,7 @@
                                                     {{ Form::token() }}
                                                     @if(! empty($student->telno))
                                                     {{ Form::hidden('sms_single',Utilities::simpleEncode(serialize(Utilities::formatGsmNumber($student->telno)))) }}
-                                                    <input type="submit" name="single" class="btn btn-sm btn-primary" value="Send SMS">
+                                                    <p><input type="submit" name="single" class="btn btn-sm btn-primary" value="Send SMS"></p>
                                                     @endif
                                                     @if(! empty($student->nokgsm))
                                                     {{ Form::hidden('sms_parents',Utilities::simpleEncode(serialize(Utilities::formatGsmNumber($student->nokgsm)))) }}

@@ -92,5 +92,10 @@ class StudentsController extends \BaseController {
         return $this->search_genders(Input::all());
 	}
 
+    public function export_csv()
+	{
+        Student::exportCsv(Input::all());
+	}
+
 
 }

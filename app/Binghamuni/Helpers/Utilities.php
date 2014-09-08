@@ -10,7 +10,7 @@ class Utilities {
     // Dropdown
     public static function departments()
     {
-        $opts = [];
+        $opts = ['all' => 'All'];
 
         $departments = DB::table('department')->remember(3600)->orderBy('deptname', 'asc')->get(['deptid','deptname']);
         foreach ($departments as $dept) {
@@ -23,7 +23,7 @@ class Utilities {
 
     public static function levels()
     {
-        $opts = [];
+        $opts = ['all' => 'All'];
 
         $levels = DB::table('level')->remember(3600)->get();
         foreach ($levels as $level) {
@@ -36,7 +36,7 @@ class Utilities {
 
     public static function states()
     {
-        $opts = [];
+        $opts = ['all' => 'All'];
 
         $states = DB::table('state')->remember(3600)->get();
         foreach ($states as $state) {
@@ -49,7 +49,7 @@ class Utilities {
 
     public static function gender()
     {
-        $opts = [];
+        $opts = ['all' => 'All'];
 
         $genders = DB::table('sex')->remember(3600)->get();
         foreach ($genders as $gender) {
@@ -64,26 +64,26 @@ class Utilities {
     // Expand
     public static function expandDepartment($id)
     {
-        $query = DB::table('department')->where('deptid','=',$id)->first(['deptname']);
-        return $query->deptname;
+        $query = DB::table('department')->where('deptid','=',trim($id))->first(['deptname']);
+        return $query ? $query->deptname : '';
     }
 
     public static function expandLevel($id)
     {
-        $query = DB::table('level')->where('levelid','=',$id)->first(['levelno']);
-        return $query->levelno;
+        $query = DB::table('level')->where('levelid','=',trim($id))->first(['levelno']);
+        return $query ? $query->levelno : '';
     }
 
     public static function expandState($id)
     {
-        $query = DB::table('state')->where('stateid','=',$id)->first(['statename']);
-        return $query->statename;
+        $query = DB::table('state')->where('stateid','=',trim($id))->first(['statename']);
+        return $query ? $query->statename : '';
     }
 
     public static function expandGender($id)
     {
-        $query = DB::table('sex')->where('sexid','=',$id)->first(['sexname']);
-        return $query->sexname;
+        $query = DB::table('sex')->where('sexid','=',trim($id))->first(['sexname']);
+        return $query ? $query->sexname : '';
     }
 
     // Encoding URL Strings

@@ -11,7 +11,8 @@
 		"barryvdh/laravel-ide-helper": "1.*@dev",
 		"google/apiclient": "dev-master",
 		"pear/mail_mime": "dev-master",
-		"pear/pear_exception": "dev-master"
+		"pear/pear_exception": "dev-master",
+        "maatwebsite/excel": "1.*"
 	},
 	"autoload": {
 		"classmap": [

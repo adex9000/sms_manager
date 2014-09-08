@@ -105,6 +105,12 @@ Route::group(['prefix' => 'students', 'before' => 'auth'],function(){
         'uses' => 'StudentsController@gender_search'
     ]);
 
+    Route::post('csv', [
+        'before' => 'csrf',
+        'as' => 'csv',
+        'uses' => 'StudentsController@export_csv'
+    ]);
+
 
 });
 
