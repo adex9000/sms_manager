@@ -14,6 +14,7 @@ class Student extends Eloquent {
     {
         $search = trim(Str::upper($data['student_search']));
         $result = static::where('regno','LIKE', $search . '%')
+                        ->where('regno','LIKE','BHU%')
                         ->orWhere('firstname','LIKE', $search . '%')
                         ->orWhere('surname','LIKE', $search . '%')
                         ->where('telno','!=','')
@@ -25,6 +26,7 @@ class Student extends Eloquent {
     public static function departmentSearch($data)
     {
         return static::where('levelid','NOT LIKE','Gradu%')
+                ->where('regno','LIKE','BHU%')
                 ->where('levelid','=',$data['level'])
                 ->where('deptid','=',$data['search'])
                 ->where('telno','!=','')
@@ -37,6 +39,7 @@ class Student extends Eloquent {
     public static function statesSearch($data)
     {
         return static::where('levelid','NOT LIKE','Gradu%')
+                ->where('regno','LIKE','BHU%')
                 ->whereIn('levelid',[1,2,3,4,5,6])
                 ->where('stateid','=',$data['search'])
                 ->where('telno','!=','')
@@ -49,6 +52,7 @@ class Student extends Eloquent {
     public static function genderSearch($data)
     {
         return static::where('levelid','NOT LIKE','Gradu%')
+                ->where('regno','LIKE','BHU%')
                 ->whereIn('levelid',[1,2,3,4,5,6])
                 ->where('sexid','=',$data['search'])
                 ->where('telno','!=','')
