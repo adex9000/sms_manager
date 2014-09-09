@@ -4,7 +4,10 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-		return View::make('home.index');
+		if(Auth::viaRemember() || Auth::user()){
+            return Redirect::to('users/dashboard');
+        }
+        return View::make('home.index');
 	}
 
 }
