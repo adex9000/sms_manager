@@ -21,10 +21,9 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     {{ $errors->first('student_search', '<span class="help-block alert alert-danger">:message</span>') }}
-                                     <form action="{{ URL::route('student_search') }}" class="form-inline" role="form" method="post">
-                                         {{ Form::token() }}
+                                     <form action="{{ URL::route('student_search') }}" class="form-inline" role="form" method="get">
                                          <div class="form-group">
-                                             <label for="search" class="sr-only">Matric No.</label>
+                                             <label for="search" class="sr-only">Matric Number</label>
                                              <input type="text" class="form-control" id="search" name="student_search" placeholder="Matric No, First Name or Surname">
                                          </div>
                                          <button type="submit" class="btn btn-default">
@@ -37,7 +36,7 @@
                                 <div class="col-lg-6">
                                         <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
                                             {{ Form::token() }}
-                                            {{ Form::hidden('csv',Utilities::simpleEncode(serialize($results))) }}
+                                            {{ Form::hidden('csv',Utilities::simpleEncode(serialize($results->toArray()))) }}
                                             {{ Form::hidden('source','search') }}
                                             <button type="submit" class="btn btn-info">
                                             <span class="glyphicon glyphicon-cloud-download"></span>
@@ -47,7 +46,7 @@
                                         </form>
                                         <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
                                             {{ Form::token() }}
-                                            {{ Form::hidden('xls',Utilities::simpleEncode(serialize($results))) }}
+                                            {{ Form::hidden('xls',Utilities::simpleEncode(serialize($results->toArray()))) }}
                                             {{ Form::hidden('source','search') }}
                                             <button type="submit" class="btn btn-danger">
                                             <span class="glyphicon glyphicon-cloud-download"></span>
@@ -57,7 +56,7 @@
                                         </form>
                                         <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
                                             {{ Form::token() }}
-                                            {{ Form::hidden('xlsx',Utilities::simpleEncode(serialize($results))) }}
+                                            {{ Form::hidden('xlsx',Utilities::simpleEncode(serialize($results->toArray()))) }}
                                             {{ Form::hidden('source','search') }}
                                             <button type="submit" class="btn btn-success">
                                             <span class="glyphicon glyphicon-cloud-download"></span>
@@ -85,7 +84,7 @@
                                     <th class="text-center" style="font-weight: normal; text-decoration: underline;">
                                         <form action="{{ URL::route('send_sms_message') }}" role="form" method="post">
                                             {{ Form::token() }}
-                                            {{ Form::hidden('sms_all',Utilities::simpleEncode(serialize($results))) }}
+                                            {{ Form::hidden('sms_all',Utilities::simpleEncode(serialize($results->toArray()))) }}
                                             <button type="submit" class="btn-link">Send SMS to all</button>
                                             <!-- Enhance experience with modal confirmation box -->
                                         </form>
@@ -97,7 +96,7 @@
                                 </thead>
                                 <tbody>
 
-                                @if($results && count($results) > 0)
+                                @if($results && count($results->toArray()) > 0)
                                     @foreach($results as $student)
                                         <tr>
                                             <td>{{ $serial_number++ }}</td>
@@ -121,6 +120,12 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @if($results->getTotal() > 30)
+                                        <tr>
+                                            <td colspan="8">{{ $results->appends(['student_search' => $search])->links()  }}</td>
+                                        </tr>
+                                    @endif
+
                                 @else
                                     <tr>
                                         <td colspan="8">No record(s) to display! Search above to see results.</td>

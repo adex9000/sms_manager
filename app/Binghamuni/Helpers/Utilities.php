@@ -103,9 +103,9 @@ class Utilities {
         $gsmNumbers = [];
 
         foreach($data as $gsm){
-            $gsmNumbers[] = isset($gsm->gsmno) ? static::formatGsmNumber($gsm->gsmno) : static::formatGsmNumber($gsm->telno);
+//            $gsmNumbers[] = isset($gsm->gsmno) ? static::formatGsmNumber($gsm->gsmno) : static::formatGsmNumber($gsm->telno);
+            $gsmNumbers[] = isset($gsm['gsmno']) ? static::formatGsmNumber($gsm['gsmno']) : static::formatGsmNumber($gsm['telno']);
         }
-
         return $gsmNumbers;
     }
 

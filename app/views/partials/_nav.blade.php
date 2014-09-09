@@ -17,7 +17,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Phonebook <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="dropdown-header">STUDENTS</li>
-                        <li {{ $active_menu_item == 'search_students' ? ' class="active"' : '' }}><a href="{{ URL::route('search_students') }}">Search</a></li>
+                        <li {{ $active_menu_item == 'search_students' ? ' class="active"' : '' }}><a href="{{ URL::route('student_search') }}">Search</a></li>
                         <li {{ $active_menu_item == 'department' ? ' class="active"' : '' }}><a href="{{ URL::route('search_departments') }}">Department &amp; Level</a></li>
                         <li {{ $active_menu_item == 'states' ? ' class="active"' : '' }}><a href="{{ URL::route('search_states') }}">State of Origin</a></li>
                         <li {{ $active_menu_item == 'gender' ? ' class="active"' : '' }}><a href="{{ URL::route('search_genders') }}">Gender</a></li>

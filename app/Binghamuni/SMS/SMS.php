@@ -92,12 +92,12 @@ class SMS extends Eloquent {
 
         $data = unserialize(Utilities::simpleDecode($gsm));
 
-        $idTypes = is_object($data) ? 1 : 2;
+        $idTypes = is_array($data) ? 1 : 2;
 
         $gsm_numbers = '';
 
         if($idTypes == 1){
-            $gsm_numbers = implode(', ', Utilities::prepareGsmArray($data));
+            $gsm_numbers = implode(', ', Utilities::prepareGsmArray($data['data']));
         }
         elseif($idTypes == 2){
             $gsm_numbers = $data;

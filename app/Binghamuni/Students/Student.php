@@ -3,8 +3,8 @@ namespace Binghamuni\Students;
 
 use Binghamuni\Helpers\Utilities;
 use Eloquent;
-use Str;
 use Excel;
+use Str;
 
 class Student extends Eloquent {
 
@@ -15,13 +15,13 @@ class Student extends Eloquent {
     public static function studentSearch($data)
     {
         $search = trim(Str::upper($data['student_search']));
-        $result = static::where('regno','LIKE', $search . '%')
+        $result = Student::where('regno','LIKE', $search . '%')
                         ->where('regno','LIKE','BHU%')
                         ->orWhere('firstname','LIKE', $search . '%')
                         ->orWhere('surname','LIKE', $search . '%')
                         ->where('telno','!=','')
                         ->whereIn('levelid',[1,2,3,4,5,6])
-                        ->get(['regno','firstname','surname','telno','nokgsm']);
+                        ->paginate(30,['regno','firstname','surname','telno','nokgsm']);
         return $result;
     }
 
@@ -35,7 +35,7 @@ class Student extends Eloquent {
         $dept->where('telno','!=','')
                 ->orderBy('deptid','asc')
                 ->orderBy('regno','asc');
-        return $dept->get(['regno','firstname','surname','telno','nokgsm','deptid', 'levelid']);
+        return $dept->paginate(30,['regno','firstname','surname','telno','nokgsm','deptid', 'levelid']);
     }
 
     public static function statesSearch($data)
@@ -48,7 +48,7 @@ class Student extends Eloquent {
                 ->whereIn('levelid',[1,2,3,4,5,6])
                 ->orderBy('stateid','asc')
                 ->orderBy('regno','asc')
-                ->get(['regno','firstname','surname','telno','nokgsm','stateid']);
+                ->paginate(30,['regno','firstname','surname','telno','nokgsm','stateid']);
     }
 
     public static function genderSearch($data)
@@ -61,12 +61,12 @@ class Student extends Eloquent {
                 ->whereIn('levelid',[1,2,3,4,5,6])
                 ->orderBy('sexid','asc')
                 ->orderBy('regno','asc')
-                ->get(['regno','firstname','surname','telno','nokgsm','sexid']);
+                ->paginate(30,['regno','firstname','surname','telno','nokgsm','sexid']);
     }
 
     public static function exportCsv($data)
     {
-        $type ='';
+        $type = '';
         if(isset($data['csv'])){
             $type = 'csv';
         } elseif(isset($data['xls'])){
@@ -99,14 +99,14 @@ class Student extends Eloquent {
     protected static function searchCsvData($data)
     {
         $csv_array = [];
-        if(is_object($data)){
+        if(is_array($data)){
             foreach ($data as $csv) {
                 $csv_array[] = [
-                    'Matric Number' => $csv->regno,
-                    'First Name' => $csv->firstname,
-                    'Surname' => $csv->surname,
-                    'GSM' => $csv->telno,
-                    'Parent GSM' => $csv->nokgsm,
+                    'Matric Number' => $csv['regno'],
+                    'First Name' => $csv['firstname'],
+                    'Surname' => $csv['surname'],
+                    'GSM' => $csv['telno'],
+                    'Parent GSM' => $csv['nokgsm'],
                 ];
             }
         }
@@ -116,16 +116,16 @@ class Student extends Eloquent {
     protected static function departmentCsvData($data)
     {
         $csv_array = [];
-        if(is_object($data)){
-            foreach ($data as $csv) {
+        if(is_array($data)){
+            foreach ($data['data'] as $csv) {
                 $csv_array[] = [
-                    'Matric Number' => $csv->regno,
-                    'First Name' => $csv->firstname,
-                    'Surname' => $csv->surname,
-                    'GSM' => $csv->telno,
-                    'Parent GSM' => $csv->nokgsm,
-                    'Department' => Utilities::expandDepartment($csv->deptid),
-                    'Level' => Utilities::expandLevel($csv->levelid)
+                    'Matric Number' => $csv['regno'],
+                    'First Name' => $csv['firstname'],
+                    'Surname' => $csv['surname'],
+                    'GSM' => $csv['telno'],
+                    'Parent GSM' => $csv['nokgsm'],
+                    'Department' => Utilities::expandDepartment($csv['deptid']),
+                    'Level' => Utilities::expandLevel($csv['levelid'])
                 ];
             }
         }
@@ -135,15 +135,15 @@ class Student extends Eloquent {
     protected static function genderCsvData($data)
     {
         $csv_array = [];
-        if(is_object($data)){
-            foreach ($data as $csv) {
+        if(is_array($data)){
+            foreach ($data['data'] as $csv) {
                 $csv_array[] = [
-                    'Matric Number' => $csv->regno,
-                    'First Name' => $csv->firstname,
-                    'Surname' => $csv->surname,
-                    'GSM' => $csv->telno,
-                    'Parent GSM' => $csv->nokgsm,
-                    'Gender' => Utilities::expandGender($csv->sexid),
+                    'Matric Number' => $csv['regno'],
+                    'First Name' => $csv['firstname'],
+                    'Surname' => $csv['surname'],
+                    'GSM' => $csv['telno'],
+                    'Parent GSM' => $csv['nokgsm'],
+                    'Gender' => Utilities::expandGender($csv['sexid']),
                 ];
             }
         }
@@ -153,15 +153,15 @@ class Student extends Eloquent {
     protected static function statesCsvData($data)
     {
         $csv_array = [];
-        if(is_object($data)){
-            foreach ($data as $csv) {
+        if(is_array($data)){
+            foreach ($data['data'] as $csv) {
                 $csv_array[] = [
-                    'Matric Number' => $csv->regno,
-                    'First Name' => $csv->firstname,
-                    'Surname' => $csv->surname,
-                    'GSM' => $csv->telno,
-                    'Parent GSM' => $csv->nokgsm,
-                    'State of Origin' => Utilities::expandState($csv->stateid),
+                    'Matric Number' => $csv['regno'],
+                    'First Name' => $csv['firstname'],
+                    'Surname' => $csv['surname'],
+                    'GSM' => $csv['telno'],
+                    'Parent GSM' => $csv['nokgsm'],
+                    'State of Origin' => Utilities::expandState($csv['stateid']),
                 ];
             }
         }

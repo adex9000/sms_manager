@@ -21,75 +21,60 @@ class StudentsController extends \BaseController {
         $this->utilities = $utilities;
     }
 
-    public function search_students($data = '')
-	{
-        $searchResults = empty($data) ? false : $this->student->studentSearch($data);
-        return View::make('students.search')
-                    ->with('active_menu_item','search_students')
-                    ->with('active_menu_item_dropdown','dropdown')
-                    ->with('results',$searchResults)
-                    ->with('serial_number', 1);
-	}
-
     public function student_search()
 	{
-        $this->searchValiation->validate(Input::only('student_search'));
+        $data = Input::only('student_search');
 
-        return $this->search_students(Input::all());
+        if(!empty($data['student_search'])) $this->searchValiation->validate($data);
 
-	}
-
-    public function search_departments($data = '')
-	{
-        $searchResults = empty($data) ? false : $this->student->departmentSearch($data);
-        return View::make('students.departments')
-                    ->with('active_menu_item','department')
-                    ->with('active_menu_item_dropdown','dropdown')
-                    ->with('departments', $this->utilities->departments())
-                    ->with('levels', $this->utilities->levels())
-                    ->with('results',$searchResults)
-                    ->with('serial_number', 1)
-                    ->with('search',isset($data['search'])? $data['search'] : '')
-                    ->with('level',isset($data['level'])? $data['level'] : '');
+        $searchResults = empty($data['student_search']) ? false : $this->student->studentSearch($data);
+        return View::make('students.search')
+            ->with('active_menu_item','search_students')
+            ->with('active_menu_item_dropdown','dropdown')
+            ->with('results',$searchResults)
+            ->with('search',isset($data['student_search'])? $data['student_search'] : '')
+            ->with('serial_number', 1);
 	}
 
     public function department_search()
 	{
-        return $this->search_departments(Input::all());
+        $input = Input::all();
+        $searchResults = empty($input['search']) ? false : $this->student->departmentSearch($input);
+        return View::make('students.departments')
+            ->with('active_menu_item','department')
+            ->with('active_menu_item_dropdown','dropdown')
+            ->with('departments', $this->utilities->departments())
+            ->with('levels', $this->utilities->levels())
+            ->with('results',$searchResults)
+            ->with('serial_number', 1)
+            ->with('search',isset($input['search'])? $input['search'] : '')
+            ->with('level',isset($input['level'])? $input['level'] : '');
 	}
 
-    public function search_states($data = '')
+    public function search_states()
 	{
-        $searchResults = empty($data) ? false : $this->student->statesSearch($data);
+        $input = Input::all();
+        $searchResults = empty($input['search']) ? false : $this->student->statesSearch($input);
         return View::make('students.states')
                     ->with('active_menu_item','states')
                     ->with('active_menu_item_dropdown','dropdown')
                     ->with('states', $this->utilities->states())
                     ->with('results',$searchResults)
                     ->with('serial_number', 1)
-                    ->with('search',isset($data['search'])? $data['search'] : '');
+                    ->with('search',isset($input['search'])? $input['search'] : '');
 	}
 
-    public function state_search()
+    public function search_genders()
 	{
-        return $this->search_states(Input::all());
-	}
-
-    public function search_genders($data = '')
-	{
-        $searchResults = empty($data) ? false : $this->student->genderSearch($data);
+        $input = Input::all();
+        $searchResults = empty($input['search']) ? false : $this->student->genderSearch($input);
         return View::make('students.gender')
                     ->with('active_menu_item','gender')
                     ->with('active_menu_item_dropdown','dropdown')
                     ->with('gender', $this->utilities->gender())
                     ->with('results',$searchResults)
                     ->with('serial_number', 1)
-                    ->with('search',isset($data['search'])? $data['search'] : '');
-	}
-
-    public function gender_search()
-	{
-        return $this->search_genders(Input::all());
+                    ->with('search',isset($input['search'])? $input['search'] : '');
 	}
 
     public function export_csv()

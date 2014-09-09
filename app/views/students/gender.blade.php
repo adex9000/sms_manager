@@ -19,8 +19,7 @@
                         <div class="col-lg-12 sm-form">
                         <div class="row">
                             <div class="col-lg-6">
-                                <form action="{{ URL::route('search_gender') }}" class="form-inline" role="form" method="post">
-                                    {{ Form::token() }}
+                                <form action="{{ URL::route('search_genders') }}" class="form-inline" role="form" method="get">
                                     <div class="form-group">
                                         <label for="states">Gender</label>
                                         {{ Form::select('search',$gender,$search,['class'=>'form-control','id'=>'gender']) }}
@@ -35,7 +34,7 @@
                             <div class="col-lg-6">
                                     <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
                                         {{ Form::token() }}
-                                        {{ Form::hidden('csv',Utilities::simpleEncode(serialize($results))) }}
+                                        {{ Form::hidden('csv',Utilities::simpleEncode(serialize($results->toArray()))) }}
                                         {{ Form::hidden('source','gender') }}
                                         <button type="submit" class="btn btn-info">
                                         <span class="glyphicon glyphicon-cloud-download"></span>
@@ -45,7 +44,7 @@
                                     </form>
                                     <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
                                         {{ Form::token() }}
-                                        {{ Form::hidden('xls',Utilities::simpleEncode(serialize($results))) }}
+                                        {{ Form::hidden('xls',Utilities::simpleEncode(serialize($results->toArray()))) }}
                                         {{ Form::hidden('source','gender') }}
                                         <button type="submit" class="btn btn-danger">
                                         <span class="glyphicon glyphicon-cloud-download"></span>
@@ -55,7 +54,7 @@
                                     </form>
                                     <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
                                         {{ Form::token() }}
-                                        {{ Form::hidden('xlsx',Utilities::simpleEncode(serialize($results))) }}
+                                        {{ Form::hidden('xlsx',Utilities::simpleEncode(serialize($results->toArray()))) }}
                                         {{ Form::hidden('source','gender') }}
                                         <button type="submit" class="btn btn-success">
                                         <span class="glyphicon glyphicon-cloud-download"></span>
@@ -84,7 +83,7 @@
                                         <th class="text-center" style="font-weight: normal; text-decoration: underline;">
                                             <form action="{{ URL::route('send_sms_message') }}" role="form" method="post">
                                                 {{ Form::token() }}
-                                                {{ Form::hidden('sms_all',Utilities::simpleEncode(serialize($results))) }}
+                                                {{ Form::hidden('sms_all',Utilities::simpleEncode(serialize($results->toArray()))) }}
                                                 <button type="submit" class="btn-link">Send SMS to all</button>
                                                 <!-- Enhance experience with modal confirmation box -->
                                             </form>
@@ -120,6 +119,11 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        @if($results->getTotal() > 30)
+                                            <tr>
+                                                <td colspan="8">{{ $results->appends(['search' => $search])->links()  }}</td>
+                                            </tr>
+                                        @endif
                                         @else
                                         <tr>
                                             <td colspan="8">No record(s) to display! Search above to see results.</td>

@@ -61,13 +61,13 @@ Route::group(['prefix' => 'students', 'before' => 'auth'],function(){
 
     // Search - GET
     Route::get('search', [
-        'as' => 'search_students',
-        'uses' => 'StudentsController@search_students'
+        'as' => 'student_search',
+        'uses' => 'StudentsController@student_search'
     ]);
 
     Route::get('departments', [
         'as' => 'search_departments',
-        'uses' => 'StudentsController@search_departments'
+        'uses' => 'StudentsController@department_search'
     ]);
 
     Route::get('states', [
@@ -80,37 +80,11 @@ Route::group(['prefix' => 'students', 'before' => 'auth'],function(){
         'uses' => 'StudentsController@search_genders'
     ]);
 
-    // Search - POST
-    Route::post('search', [
-        'before' => 'csrf',
-        'as' => 'student_search',
-        'uses' => 'StudentsController@student_search'
-    ]);
-
-    Route::post('departments', [
-        'before' => 'csrf',
-        'as' => 'search_department',
-        'uses' => 'StudentsController@department_search'
-    ]);
-
-    Route::post('states', [
-        'before' => 'csrf',
-        'as' => 'search_state',
-        'uses' => 'StudentsController@state_search'
-    ]);
-
-    Route::post('gender', [
-        'before' => 'csrf',
-        'as' => 'search_gender',
-        'uses' => 'StudentsController@gender_search'
-    ]);
-
     Route::post('csv', [
         'before' => 'csrf',
         'as' => 'csv',
         'uses' => 'StudentsController@export_csv'
     ]);
-
 
 });
 
