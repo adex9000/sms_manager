@@ -34,7 +34,7 @@
                             <div class="col-lg-6">
                                     <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
                                         {{ Form::token() }}
-                                        {{ Form::hidden('csv',Utilities::simpleEncode(serialize($results->toArray()))) }}
+                                        {{ Form::hidden('csv',Utilities::simpleEncode(serialize($allResults->toArray()))) }}
                                         {{ Form::hidden('source','gender') }}
                                         <button type="submit" class="btn btn-info">
                                         <span class="glyphicon glyphicon-cloud-download"></span>
@@ -44,7 +44,7 @@
                                     </form>
                                     <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
                                         {{ Form::token() }}
-                                        {{ Form::hidden('xls',Utilities::simpleEncode(serialize($results->toArray()))) }}
+                                        {{ Form::hidden('xls',Utilities::simpleEncode(serialize($allResults->toArray()))) }}
                                         {{ Form::hidden('source','gender') }}
                                         <button type="submit" class="btn btn-danger">
                                         <span class="glyphicon glyphicon-cloud-download"></span>
@@ -54,7 +54,7 @@
                                     </form>
                                     <form action="{{ URL::route('csv') }}" style="display: inline-block;" role="form" method="post">
                                         {{ Form::token() }}
-                                        {{ Form::hidden('xlsx',Utilities::simpleEncode(serialize($results->toArray()))) }}
+                                        {{ Form::hidden('xlsx',Utilities::simpleEncode(serialize($allResults->toArray()))) }}
                                         {{ Form::hidden('source','gender') }}
                                         <button type="submit" class="btn btn-success">
                                         <span class="glyphicon glyphicon-cloud-download"></span>
@@ -83,7 +83,7 @@
                                         <th class="text-center" style="font-weight: normal; text-decoration: underline;">
                                             <form action="{{ URL::route('send_sms_message') }}" role="form" method="post">
                                                 {{ Form::token() }}
-                                                {{ Form::hidden('sms_all',Utilities::simpleEncode(serialize($results->toArray()))) }}
+                                                {{ Form::hidden('sms_all',Utilities::simpleEncode(serialize($allResults->toArray()))) }}
                                                 <button type="submit" class="btn-link">Send SMS to all</button>
                                                 <!-- Enhance experience with modal confirmation box -->
                                             </form>

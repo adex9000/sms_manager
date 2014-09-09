@@ -31,7 +31,8 @@ class StudentsController extends \BaseController {
         return View::make('students.search')
             ->with('active_menu_item','search_students')
             ->with('active_menu_item_dropdown','dropdown')
-            ->with('results',$searchResults)
+            ->with('results',$searchResults['paginatedResult'])
+            ->with('allResults',$searchResults['allResult'])
             ->with('search',isset($data['student_search'])? $data['student_search'] : '')
             ->with('serial_number', 1);
 	}
@@ -45,7 +46,8 @@ class StudentsController extends \BaseController {
             ->with('active_menu_item_dropdown','dropdown')
             ->with('departments', $this->utilities->departments())
             ->with('levels', $this->utilities->levels())
-            ->with('results',$searchResults)
+            ->with('results',$searchResults['paginatedResult'])
+            ->with('allResults',$searchResults['allResult'])
             ->with('serial_number', 1)
             ->with('search',isset($input['search'])? $input['search'] : '')
             ->with('level',isset($input['level'])? $input['level'] : '');
@@ -59,7 +61,8 @@ class StudentsController extends \BaseController {
                     ->with('active_menu_item','states')
                     ->with('active_menu_item_dropdown','dropdown')
                     ->with('states', $this->utilities->states())
-                    ->with('results',$searchResults)
+                    ->with('results',$searchResults['paginatedResult'])
+                    ->with('allResults',$searchResults['allResult'])
                     ->with('serial_number', 1)
                     ->with('search',isset($input['search'])? $input['search'] : '');
 	}
@@ -72,7 +75,8 @@ class StudentsController extends \BaseController {
                     ->with('active_menu_item','gender')
                     ->with('active_menu_item_dropdown','dropdown')
                     ->with('gender', $this->utilities->gender())
-                    ->with('results',$searchResults)
+                    ->with('results',$searchResults['paginatedResult'])
+                    ->with('allResults',$searchResults['allResult'])
                     ->with('serial_number', 1)
                     ->with('search',isset($input['search'])? $input['search'] : '');
 	}

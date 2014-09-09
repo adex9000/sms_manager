@@ -91,13 +91,13 @@ class SMS extends Eloquent {
         }
 
         $data = unserialize(Utilities::simpleDecode($gsm));
-
+        $data = isset($data['data']) ? $data['data'] : $data;
         $idTypes = is_array($data) ? 1 : 2;
 
         $gsm_numbers = '';
 
         if($idTypes == 1){
-            $gsm_numbers = implode(', ', Utilities::prepareGsmArray($data['data']));
+            $gsm_numbers = implode(', ', Utilities::prepareGsmArray($data));
         }
         elseif($idTypes == 2){
             $gsm_numbers = $data;

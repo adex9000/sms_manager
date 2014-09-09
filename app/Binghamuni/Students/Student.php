@@ -20,9 +20,10 @@ class Student extends Eloquent {
                         ->orWhere('firstname','LIKE', $search . '%')
                         ->orWhere('surname','LIKE', $search . '%')
                         ->where('telno','!=','')
-                        ->whereIn('levelid',[1,2,3,4,5,6])
-                        ->paginate(30,['regno','firstname','surname','telno','nokgsm']);
-        return $result;
+                        ->whereIn('levelid',[1,2,3,4,5,6]);
+        $allResult = $result->get(['regno','firstname','surname','telno','nokgsm']);
+        $paginatedResult = $result->paginate(30,['regno','firstname','surname','telno','nokgsm']);
+        return ['allResult' => $allResult, 'paginatedResult' => $paginatedResult];
     }
 
     public static function departmentSearch($data)
@@ -35,7 +36,9 @@ class Student extends Eloquent {
         $dept->where('telno','!=','')
                 ->orderBy('deptid','asc')
                 ->orderBy('regno','asc');
-        return $dept->paginate(30,['regno','firstname','surname','telno','nokgsm','deptid', 'levelid']);
+        $allResult = $dept->get(['regno','firstname','surname','telno','nokgsm','deptid', 'levelid']);
+        $paginatedResult = $dept->paginate(30,['regno','firstname','surname','telno','nokgsm','deptid', 'levelid']);
+        return ['allResult' => $allResult, 'paginatedResult' => $paginatedResult];
     }
 
     public static function statesSearch($data)
@@ -44,11 +47,13 @@ class Student extends Eloquent {
                 ->where('regno','LIKE','BHU%')
                 ->where('stateid','!=','');
         if($data['search'] != 'all'){ $state->where('stateid','=',$data['search']); }
-        return $state->where('telno','!=','')
+        $state->where('telno','!=','')
                 ->whereIn('levelid',[1,2,3,4,5,6])
                 ->orderBy('stateid','asc')
-                ->orderBy('regno','asc')
-                ->paginate(30,['regno','firstname','surname','telno','nokgsm','stateid']);
+                ->orderBy('regno','asc');
+        $allResult = $state->get(['regno','firstname','surname','telno','nokgsm','stateid']);
+        $paginatedResult = $state->paginate(30,['regno','firstname','surname','telno','nokgsm','stateid']);
+        return ['allResult' => $allResult, 'paginatedResult' => $paginatedResult];
     }
 
     public static function genderSearch($data)
@@ -57,11 +62,13 @@ class Student extends Eloquent {
                 ->where('regno','LIKE','BHU%')
                 ->where('sexid','!=','');
         if($data['search'] != 'all'){ $gender->where('sexid','=',$data['search']); }
-        return $gender->where('telno','!=','')
+        $gender->where('telno','!=','')
                 ->whereIn('levelid',[1,2,3,4,5,6])
                 ->orderBy('sexid','asc')
-                ->orderBy('regno','asc')
-                ->paginate(30,['regno','firstname','surname','telno','nokgsm','sexid']);
+                ->orderBy('regno','asc');
+        $allResult = $gender->get(['regno','firstname','surname','telno','nokgsm','sexid']);
+        $paginatedResult = $gender->paginate(30,['regno','firstname','surname','telno','nokgsm','sexid']);
+        return ['allResult' => $allResult, 'paginatedResult' => $paginatedResult];
     }
 
     public static function exportCsv($data)
@@ -99,6 +106,7 @@ class Student extends Eloquent {
     protected static function searchCsvData($data)
     {
         $csv_array = [];
+        $data = isset($data['data']) ? $data['data'] : $data;
         if(is_array($data)){
             foreach ($data as $csv) {
                 $csv_array[] = [
@@ -116,8 +124,9 @@ class Student extends Eloquent {
     protected static function departmentCsvData($data)
     {
         $csv_array = [];
+        $data = isset($data['data']) ? $data['data'] : $data;
         if(is_array($data)){
-            foreach ($data['data'] as $csv) {
+            foreach ($data as $csv) {
                 $csv_array[] = [
                     'Matric Number' => $csv['regno'],
                     'First Name' => $csv['firstname'],
@@ -135,8 +144,9 @@ class Student extends Eloquent {
     protected static function genderCsvData($data)
     {
         $csv_array = [];
+        $data = isset($data['data']) ? $data['data'] : $data;
         if(is_array($data)){
-            foreach ($data['data'] as $csv) {
+            foreach ($data as $csv) {
                 $csv_array[] = [
                     'Matric Number' => $csv['regno'],
                     'First Name' => $csv['firstname'],
@@ -153,8 +163,9 @@ class Student extends Eloquent {
     protected static function statesCsvData($data)
     {
         $csv_array = [];
+        $data = isset($data['data']) ? $data['data'] : $data;
         if(is_array($data)){
-            foreach ($data['data'] as $csv) {
+            foreach ($data as $csv) {
                 $csv_array[] = [
                     'Matric Number' => $csv['regno'],
                     'First Name' => $csv['firstname'],
