@@ -123,31 +123,26 @@ class Utilities {
     // Misc
     public static function gsmNoValidation($value)
     {
-        if(strlen($value) < 11) return false;
+        if(strlen($value) < 11) { return false; }
 
         if(strlen($value) > 11){
             if(strlen($value) == 13) {
                 return is_numeric($value)? true : false;
-            }
-            elseif(strlen($value) > 13){
+            } elseif(strlen($value) > 13){
                 $nos = explode(',',trim($value));
                 if(count($nos) < 0){
                     return false;
                 } else {
-                    $t = [];
-                    foreach ($nos as $no) {
-                        if(!is_numeric($no)){
-                            $t[] = $no;
-                        }
-                    }
-                    if(count($t) > 0){
-                        return false;
-                    } else {
+                    $count = static::cleanGsmNos($nos);
+                    if(count($count) > 0){
                         return true;
+                    } else {
+                        return false;
                     }
                 }
+            } else {
+                return false;
             }
-            return false;
         }
     }
 
@@ -158,5 +153,21 @@ class Utilities {
                 return 'checked="checked"';
             }
         }
+    }
+
+    public static function cleanGsmNos($nos, $string = false)
+    {
+        $allNos = [];
+
+        if($string){ $nos = explode(',',$nos); }
+        $unique = array_unique($nos);
+        foreach ($unique as $number) {
+            $number = trim($number);
+            if(is_numeric($number)){
+                $allNos[] = $number;
+            }
+        }
+        return $string ? implode(',',$allNos) : $allNos;
+
     }
 } 

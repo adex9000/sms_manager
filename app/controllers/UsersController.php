@@ -2,10 +2,10 @@
 
 use Binghamuni\Forms\LoginForm;
 use Binghamuni\Forms\SmsForm;
+use Binghamuni\SMS\SMS;
+use Binghamuni\Users\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use Binghamuni\Users\User;
-use Binghamuni\SMS\SMS;
 
 class UsersController extends \BaseController {
 
@@ -72,7 +72,7 @@ class UsersController extends \BaseController {
 
     public function send_sms()
     {
-        $this->smsValidation->validate(Input::only('sender_id','destination_nos','sms_message'));
+//        $this->smsValidation->validate(Input::only('sender_id','destination_nos','sms_message'));
 
         $sms = $this->sms->sendSms(Input::all());
 

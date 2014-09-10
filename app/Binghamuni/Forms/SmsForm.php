@@ -16,6 +16,6 @@ class SmsForm extends FormValidator {
     public function validateDestinationnos($attribute, $value, $parameters)
     {
         return Utilities::gsmNoValidation($value);
-}
+    }
 
 } 

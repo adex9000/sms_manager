@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-group">
                     <label for="destination_nos" class="sr-only">Destination GSM Nos.</label>
-                    <textarea class="form-control" id="destination_nos" name="destination_nos" rows="3" placeholder="Destination GSM Nos.">{{ $gsm_numbers }}</textarea>
+                    <textarea class="form-control" id="destination_nos" name="destination_nos" rows="3" placeholder="Destination GSM Nos." readonly>{{ Utilities::cleanGsmNos($gsm_numbers, true) }}</textarea>
                     {{ $errors->first('destination_nos', '<span class="help-block alert alert-danger">:message</span>') }}
                 </div>
                 <div class="form-group">
